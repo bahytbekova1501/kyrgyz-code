@@ -2,7 +2,6 @@
 import Link from "next/link";
 import styles from "./HomePage.module.css";
 import ProductList from "./products/ProductsList";
-import { metaData } from "./metadata";
 import Button from "@/components/ui/button/Button";
 import Image from "next/image";
 import star from "../img/star.svg";
@@ -15,6 +14,13 @@ import photo3 from "../img/photo3.svg";
 import { useEffect, useRef } from "react";
 import StickyImages from "@/components/StickyImages/StickyImages";
 import List from "@/components/List";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My App Title",
+  description: "Description of my app",
+  // другие мета-данные
+};
 
 export default function Home() {
   const handleClick = () => {
@@ -192,4 +198,3 @@ export default function Home() {
     </main>
   );
 }
-export const meta2 = metaData;
