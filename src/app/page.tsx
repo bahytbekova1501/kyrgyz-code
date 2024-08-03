@@ -63,7 +63,7 @@ export default function Home() {
           </div>
           <h1 className={styles.main_text}>
             Преобразуем ваш <br />
-            бизнес в цифровую реальность
+            бизнес в цифровую <br /> реальность
           </h1>
           <div style={{ margin: "5vw 0" }}>
             <Button label="Начать проект" onClick={handleClick} />

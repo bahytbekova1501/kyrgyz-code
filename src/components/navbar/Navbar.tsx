@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
           <Image className={styles.logo} src={logo} alt="" />
         </Link>
         <div className={styles.nav_right_block}>
-          <div className={styles.nav_auth}>
+          {/* <div className={styles.nav_auth}>
             <Image className={styles.userImg} src={userImg} alt="" />
             <div className={styles.user_name}>
               <p>
@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
               </p>
               <Image className={styles.arrow} src={arrow} alt="" />
             </div>
-          </div>
+          </div> */}
           <div className={styles.nav_menu}>
             <button className={styles.menu_btn}>
               {" "}
