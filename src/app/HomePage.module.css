@@ -1,0 +1,159 @@
+.container {
+  width: 94%;
+  margin: 0 auto;
+}
+.main,
+.portfolio_block,
+.platform {
+  margin: 0 0 7vw 0;
+}
+.main_text {
+  line-height: 1;
+  font-size: 6vw;
+  font-weight: 800;
+}
+.navigate_btn {
+  color: black;
+  padding: 0.6vw 1.3vw;
+  background-color: white;
+  border: none;
+  border-radius: 5.7vw;
+  margin: 0 1vw 2vw 0;
+  box-shadow: 0px 7px 15px 0px #00000005;
+  font-size: 1.1vw;
+  font-weight: 500;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.navigate_btn:hover {
+  box-shadow: 0px 7px 15px 0px #00000005;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio_block {
+  position: relative;
+  overflow: hidden;
+  height: 110vw;
+}
+.portfolio_text {
+  position: relative;
+  text-align: center;
+  font-size: 5vw;
+  font-weight: 700;
+  height: 100%;
+  margin: 0 0 12vw 0;
+}
+
+.portfolio_text span {
+  color: white;
+}
+
+.star_logo {
+  position: absolute;
+  top: 46%;
+  left: 36.5%;
+  transform: translate(-50%, -50%);
+  width: 14%;
+  height: auto;
+}
+
+.backImage {
+  padding: 18vw 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -5;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.portfolio_card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 0 5vw 0;
+}
+.second_text {
+  line-height: 1;
+  font-size: 4.5vw;
+  font-weight: 800;
+  margin: 0 0 2.1vw 0;
+}
+.portfolio_left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.portfolio_right {
+  width: 65%;
+}
+.platform {
+  margin: 0 0 7vw 0;
+}
+.platform_top {
+  display: flex;
+  justify-content: space-between;
+}
+.platform_right {
+  /* min-width: 70%; */
+  font-size: 1.5vw;
+  font-weight: 500;
+}
+/* .platform_iPad {
+  margin: 4.2vw 0 0 0;
+  display: flex;
+} */
+/* .iPad {
+  margin: 0 4.2vw 0 0;
+  width: 100%;
+  height: 44vw;
+} */
+.integration {
+  position: relative;
+  height: 70vw;
+}
+
+.backImage2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -5;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.integration {
+  margin: 0 0 1.5vw 0;
+}
+.integration_content {
+  display: flex;
+  justify-content: space-between;
+  padding: 3vw 0 0 0;
+  color: white;
+}
+.integration_content p {
+  font-size: 1.5vw;
+  font-weight: 500;
+}
+.integration_left {
+  display: flex;
+  justify-content: space-between;
+}
+.integration_right h3 {
+  margin: 0 0 2.8vw 0;
+  font-size: 4.5vw;
+  line-height: 1;
+}
+.team {
+  display: flex;
+  /* width: 15vw; */
+  margin: 0 5.5vw 0 0;
+}
+.team_photo {
+  width: 5.5vw;
+  height: 5.5vw;
+  margin-right: -1.5vw;
+  border: none;
+  border-radius: 50%;
+}

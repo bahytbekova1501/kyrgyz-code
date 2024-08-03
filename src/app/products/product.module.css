@@ -1,0 +1,139 @@
+.card_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card {
+  position: relative;
+  width: 20vw; /* Ensure all cards have the same width */
+  height: 17vw; /* Ensure all cards have a minimum height */
+  display: flex;
+  flex-direction: column;
+  margin: 0 0.5vw;
+  padding: 1.4vw;
+  border: none;
+  border-radius: 2.8vw;
+  background-color: #fff;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden; /* Ensure no overflow of background image */
+  box-sizing: border-box; /* Include padding in width and height */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card_content {
+  position: relative;
+  z-index: 1; /* Ensure content is above background */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start; /* Center content horizontally */
+  height: 100%;
+}
+
+.card h2 {
+  font-size: 1.3vw;
+  font-weight: 700;
+}
+
+.card p {
+  margin: 0;
+  text-align: center; /* Center text horizontally */
+}
+
+/* Apply different styles based on the card type */
+.text .card_content {
+  justify-content: center; /* Center content vertically */
+}
+
+.text-picture,
+.picture-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-picture img,
+.picture-text img {
+  max-width: 100%;
+  height: auto;
+  /* margin: 1vw 0; Adjust margin for spacing */
+}
+
+/* Style for text-bgImage */
+.text-bgImage {
+  background-color: transparent; /* Remove any default background */
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+.bg_image_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.card_background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* Ensure background is behind content */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.3
+  ); /* Optional dark overlay for text readability */
+  z-index: -1;
+}
+
+.text-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #14ae5c;
+  color: white;
+}
+
+.text-btn button {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  color: black;
+  border: none;
+  padding: 0.5vw 1vw;
+  font-weight: 500;
+  font-size: 1vw;
+  border-radius: 1vw;
+  cursor: pointer;
+}
+
+.text-btn button:hover {
+  background-color: #efeeee;
+  color: #03442a;
+}
+.btnlogo {
+  margin: 0 0.5vw 0 0;
+  width: 1.7vw;
+  height: 1.7vw;
+}
+.number {
+  color: red; /* Пример стиля */
+  font-weight: bold; /* Пример стиля */
+}

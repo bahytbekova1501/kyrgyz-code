@@ -1,113 +1,195 @@
+"use client";
+import Link from "next/link";
+import styles from "./HomePage.module.css";
+import ProductList from "./products/ProductsList";
+import { metaData } from "./metadata";
+import Button from "@/components/ui/button/Button";
 import Image from "next/image";
+import star from "../img/star.svg";
+import backImage from "../img/backImage.png";
+import iPad from "../img/iPad - Home Screen - Light.png";
+import backImage2 from "../img/bg2.png";
+import photo1 from "../img/photo1.svg";
+import photo2 from "../img/photo2.svg";
+import photo3 from "../img/photo3.svg";
+import { useEffect, useRef } from "react";
+import StickyImages from "@/components/StickyImages/StickyImages";
+import List from "@/components/List";
 
 export default function Home() {
+  const handleClick = () => {
+    alert("Button clicked!");
+  };
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (containerRef.current) {
+        const container = containerRef.current;
+        const containerHeight = container.clientHeight;
+        const scrollY = window.scrollY;
+        const viewHeight = window.innerHeight;
+
+        // Проверка, достигнут ли конец контейнера
+        if (scrollY + viewHeight > container.offsetTop + containerHeight) {
+          // Достигнут конец контейнера
+          container.style.position = "static"; // Устанавливаем позицию как static
+        } else {
+          // В пределах контейнера
+          container.style.position = "sticky";
+          container.style.top = "0"; // Устанавливаем top в 0
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main>
+      <section id="section1" className={styles.main}>
+        <div className={styles.container}>
+          <div>
+            <Link href="#portfolio">
+              <button className={styles.navigate_btn}>Портфолио</button>
+            </Link>
+            <Link href="#we">
+              <button className={styles.navigate_btn}>Кто мы вообще</button>
+            </Link>{" "}
+            <Link href="#products">
+              <button className={styles.navigate_btn}>Наши продукты</button>
+            </Link>
+          </div>
+          <h1 className={styles.main_text}>
+            Преобразуем ваш <br />
+            бизнес в цифровую реальность
+          </h1>
+          <div style={{ margin: "5vw 0" }}>
+            <Button label="Начать проект" onClick={handleClick} />
+          </div>
+
+          <ProductList />
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      </section>
+      <section>
+        <div className={styles.portfolio_block}>
+          <div className={styles.container}>
+            <div id="we" className={styles.portfolio_text}>
+              <h2 className={styles.main_text}>
+                Мы создаем <br />
+                продукты для <br />
+                качественного
+                <br />
+                <span>
+                  взаимодействия <br />
+                  между людьми, <br />
+                  бизнесом и<br /> государством.
+                </span>
+              </h2>
+              <div className={styles.star_logo}>
+                <Image src={star} alt="" layout="responsive" />
+              </div>{" "}
+            </div>{" "}
+          </div>
+          <div id="portfolio">
+            <div className={styles.container}>
+              <div id="portfolio" className={styles.portfolio_card}>
+                <div className={styles.portfolio_left}>
+                  <h3 className={styles.second_text} style={{ color: "white" }}>
+                    Portfolio
+                  </h3>
+                  <Button label="Apply" onClick={handleClick} />
+                </div>
+                <div className={styles.portfolio_right}>
+                  <List />
+                </div>
+              </div>
+            </div>{" "}
+          </div>
+          <div>
+            <Image
+              className={styles.backImage}
+              src={backImage}
+              alt=""
+              layout="responsive"
+            />
+          </div>
+        </div>
+      </section>
+      <section id="products">
+        <div className={styles.container}>
+          <div className={styles.platform}>
+            <div className={styles.platform_top}>
+              <div className={styles.platform_left}>
+                <h3 className={styles.second_text}>
+                  Запустили <br /> образовательную <br />
+                  платформу bilim.ed,
+                  <br /> которой пользуются <br />
+                  половина <br />
+                  университетов <br />
+                  Бишкека
+                </h3>
+                <Button label="Узнать подробнее" onClick={handleClick} />
+              </div>
+              <p className={styles.platform_right}>
+                Современные системы <br /> образования не соответствуют <br />
+                запросам ни общества, ни рынка <br />
+                труда. Они не удовлетворяют <br />
+                потребности в качественном <br />
+                образовании и не способствуют <br />
+                всестороннему развитию <br />
+                учащихся.
+              </p>
+            </div>
+            <div className={styles.platform_iPad}>
+              <div className={styles.imagesWrapper}>
+                <StickyImages />
+                {/* <Image className={styles.iPad} src={iPad} alt="" />
+                <Image className={styles.iPad} src={iPad} alt="" />
+                <Image className={styles.iPad} src={iPad} alt="" />{" "}
+                <Image className={styles.iPad} src={iPad} alt="" />{" "}
+                <Image className={styles.iPad} src={iPad} alt="" /> */}
+              </div>
+            </div>
+          </div>{" "}
+        </div>
+      </section>
+      <section id="section4">
+        <div className={styles.integration}>
+          <div className={styles.container}>
+            <div className={styles.integration_content}>
+              <div className={styles.integration_left}>
+                <div className={styles.team}>
+                  <Image className={styles.team_photo} src={photo1} alt="" />
+                  <Image className={styles.team_photo} src={photo2} alt="" />
+                  <Image className={styles.team_photo} src={photo3} alt="" />
+                </div>
+                <p>
+                  Интегрируемся <br /> в процессы, <br /> поговорим с хэдами,
+                  <br />
+                  соберём воркшоп <br />
+                  с исследователем
+                </p>
+              </div>
+              <div className={styles.integration_right}>
+                <h3>
+                  Укрепим команду <br />
+                  или сами <br />
+                  поработаем над <br />
+                  продуктом: <br />
+                  ищем точки роста, <br /> закрываем задачи <br /> или запускаем
+                  MVP.{" "}
+                </h3>
+                <p>от 100 000 сом за спринт</p>
+              </div>
+            </div>
+          </div>
+          <Image className={styles.backImage2} src={backImage2} alt="" />
+        </div>
+      </section>
     </main>
   );
 }
+export const meta2 = metaData;
