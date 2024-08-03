@@ -14,13 +14,6 @@ import photo3 from "../img/photo3.svg";
 import { useEffect, useRef } from "react";
 import StickyImages from "@/components/StickyImages/StickyImages";
 import List from "@/components/List";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "My App Title",
-  description: "Description of my app",
-  // другие мета-данные
-};
 
 export default function Home() {
   const handleClick = () => {

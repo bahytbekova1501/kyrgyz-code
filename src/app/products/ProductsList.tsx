@@ -2,11 +2,12 @@
 import { deleteProduct, fetchProducts } from "@/redux/slices/productSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Product from "./Product";
 import styles from "./product.module.css";
 import { StyleType } from "@/types/card.types";
+import { useDispatch } from "react-redux";
 
 const validStyleTypes: Set<StyleType> = new Set<StyleType>([
   "text",
