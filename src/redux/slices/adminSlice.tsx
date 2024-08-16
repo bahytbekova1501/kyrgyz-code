@@ -6,7 +6,7 @@ interface Admin {
 }
 
 const initialState: Admin = {
-  isAdmin: localStorage.getItem("isAdmin") === "true", // Инициализация из localStorage
+  isAdmin: true, // Инициализация из localStorage
 };
 const adminSlice = createSlice({
   name: "admin",
@@ -14,11 +14,11 @@ const adminSlice = createSlice({
   reducers: {
     setAdmin(state, action: PayloadAction<boolean>) {
       state.isAdmin = action.payload;
-      localStorage.setItem("isAdmin", String(action.payload)); // Сохранение в localStorage
+      // localStorage.setItem("isAdmin", String(action.payload)); // Сохранение в localStorage
     },
     logoutAdmin(state) {
       state.isAdmin = false;
-      localStorage.removeItem("isAdmin"); // Удаление из localStorage
+      // localStorage.removeItem("isAdmin"); // Удаление из localStorage
     },
   },
 });
