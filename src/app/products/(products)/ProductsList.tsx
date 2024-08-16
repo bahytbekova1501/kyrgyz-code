@@ -8,6 +8,8 @@ import Product from "./Product";
 import styles from "./product.module.css";
 import { StyleType } from "@/types/card.types";
 import { useDispatch } from "react-redux";
+import Link from "next/link";
+import Button from "@/components/ui/button/Button";
 
 const validStyleTypes: Set<StyleType> = new Set<StyleType>([
   "text",
@@ -38,6 +40,7 @@ const ProductList: React.FC = () => {
 
   return (
     <div>
+      {" "}
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       <div className={styles.card_container}>
@@ -55,6 +58,11 @@ const ProductList: React.FC = () => {
         ) : (
           <p>No products available</p>
         )}
+      </div>{" "}
+      <div style={{ display: "flex", justifyContent: "end" }}>
+        <Link href="/products/addProduct">
+          <button className={styles.addProduct_btn}> Добавить </button>
+        </Link>
       </div>
     </div>
   );

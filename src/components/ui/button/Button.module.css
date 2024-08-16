@@ -23,3 +23,20 @@
   background-color: #6c757d;
   cursor: not-allowed;
 }
+
+@media (max-width: 769px) {
+  .button {
+    width: 28vw;
+    height: 8vw;
+    border-radius: 3vw;
+    font-size: 2vw;
+  }
+}
+@media (max-width: 450px) {
+  .button {
+    width: 94vw;
+    height: 20vw;
+    border-radius: 7vw;
+    font-size: 5vw;
+  }
+}

@@ -46,6 +46,7 @@ export const fetchProducts = createAsyncThunk(
     const snapshot = await get(productsRef);
     if (snapshot.exists()) {
       const data = snapshot.val();
+      console.log(data);
       return Array.isArray(data) ? data : Object.values(data);
     } else {
       return [];

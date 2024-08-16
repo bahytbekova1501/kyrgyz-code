@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import styles from "./HomePage.module.css";
-import ProductList from "./products/ProductsList";
+import ProductList from "./products/(products)/ProductsList";
 import Button from "@/components/ui/button/Button";
 import Image from "next/image";
 import star from "../img/star.svg";
@@ -14,6 +14,8 @@ import photo3 from "../img/photo3.svg";
 import { useEffect, useRef } from "react";
 import StickyImages from "@/components/StickyImages/StickyImages";
 import List from "@/components/List";
+import PortfolioList from "./products/(portfolio)/PortfolioList";
+// import PortfolioProductList from "./products/(portfolioProducts)/PortfolioProductsList";
 
 export default function Home() {
   const handleClick = () => {
@@ -52,18 +54,17 @@ export default function Home() {
         <div className={styles.container}>
           <div>
             <Link href="#portfolio">
-              <button className={styles.navigate_btn}>Портфолио</button>
+              <button className={styles.navigate_btn}>Работы</button>
             </Link>
             <Link href="#we">
-              <button className={styles.navigate_btn}>Кто мы вообще</button>
+              <button className={styles.navigate_btn}>Кто мы</button>
             </Link>{" "}
             <Link href="#products">
-              <button className={styles.navigate_btn}>Наши продукты</button>
+              <button className={styles.navigate_btn}>Продукты</button>
             </Link>
           </div>
           <h1 className={styles.main_text}>
-            Преобразуем ваш <br />
-            бизнес в цифровую <br /> реальность
+            Преобразуем ваш бизнес в цифровую реальность
           </h1>
           <div style={{ margin: "5vw 0" }}>
             <Button label="Начать проект" onClick={handleClick} />
@@ -76,7 +77,7 @@ export default function Home() {
         <div className={styles.portfolio_block}>
           <div className={styles.container}>
             <div id="we" className={styles.portfolio_text}>
-              <h2 className={styles.main_text}>
+              <h2 className={styles.main_text_2}>
                 Мы создаем <br />
                 продукты для <br />
                 качественного
@@ -99,10 +100,12 @@ export default function Home() {
                   <h3 className={styles.second_text} style={{ color: "white" }}>
                     Portfolio
                   </h3>
-                  <Button label="Apply" onClick={handleClick} />
+                  {/* <Button label="Apply" onClick={handleClick} /> */}
                 </div>
                 <div className={styles.portfolio_right}>
-                  <List />
+                  {/* <PortfolioProductList /> */}
+                  {/* <List /> */}
+                  <PortfolioList />
                 </div>
               </div>
             </div>{" "}
@@ -130,7 +133,6 @@ export default function Home() {
                   университетов <br />
                   Бишкека
                 </h3>
-                <Button label="Узнать подробнее" onClick={handleClick} />
               </div>
               <p className={styles.platform_right}>
                 Современные системы <br /> образования не соответствуют <br />
@@ -142,6 +144,7 @@ export default function Home() {
                 учащихся.
               </p>
             </div>
+            <Button label="Скоро" onClick={handleClick} />
             <div className={styles.platform_iPad}>
               <div className={styles.imagesWrapper}>
                 <StickyImages />

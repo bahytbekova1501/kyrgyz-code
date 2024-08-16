@@ -25,10 +25,10 @@ const Footer: React.FC = () => {
         </Link>
         <div id="contact" className={styles.footer_right}>
           <div className={styles.right_block}>
-            <Link href="/">home</Link>
-            <Link href="/#we">about</Link>
-            <Link href="/#portfolio">works</Link>
-            <Link href="/#contact">contact us</Link>
+            <Link href="/">главная</Link>
+            <Link href="/#we">о нас</Link>
+            <Link href="/#portfolio">портфолио</Link>
+            <Link href="/#contact">связаться</Link>
           </div>
           <div className={styles.right_block}>
             <Link href="#">linkedin</Link>
