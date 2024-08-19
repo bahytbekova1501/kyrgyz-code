@@ -19,7 +19,7 @@ const Admin: React.FC<AdminProps> = ({ onClose }) => {
       alert("Invalid credentials");
     }
   };
-  // всввспше
+
   return (
     <div className={styles.admin_container}>
       <form>
