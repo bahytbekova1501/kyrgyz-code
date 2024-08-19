@@ -28,7 +28,14 @@ const Footer: React.FC = () => {
             <Link href="/">главная</Link>
             <Link href="/#we">о нас</Link>
             <Link href="/#portfolio">портфолио</Link>
-            <Link href="/#contact">связаться</Link>
+            <a
+              href="https://t.me/Markus_Loni"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              связаться
+            </a>
+            {/* <Link href="/#contact">связаться</Link> */}
           </div>
           <div className={styles.right_block}>
             <Link href="#">linkedin</Link>

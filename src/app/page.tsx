@@ -67,7 +67,13 @@ export default function Home() {
             Преобразуем ваш бизнес в цифровую реальность
           </h1>
           <div style={{ margin: "5vw 0" }}>
-            <Button label="Начать проект" onClick={handleClick} />
+            <a
+              href="https://t.me/Markus_Loni"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button label="Начать проект" />
+            </a>
           </div>
 
           <ProductList />
@@ -131,7 +137,17 @@ export default function Home() {
                   В разработке большая образовательная платформа для всех
                   учреждений
                 </h3>{" "}
-                <Button label="Скоро" onClick={handleClick} />
+                <a
+                  href="https://t.me/Markus_Loni"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    label="Скоро"
+                    // onClick={handleClick}
+                    color="#838383"
+                  />
+                </a>
               </div>
               <p className={styles.platform_right}>
                 Современные системы образования не соответствуют запросам ни

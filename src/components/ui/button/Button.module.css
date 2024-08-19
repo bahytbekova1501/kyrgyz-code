@@ -10,13 +10,12 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 .button:hover {
   background-color: #109d51;
-}
-
-.button:active {
-  background-color: #004085;
 }
 
 .button:disabled {
