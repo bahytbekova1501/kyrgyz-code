@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import styles from "./HomePage.module.css";
-import ProductList from "./products/ProductsList";
+import ProductList from "./products/(products)/ProductsList";
 import Button from "@/components/ui/button/Button";
 import Image from "next/image";
 import star from "../img/star.svg";
@@ -14,6 +14,8 @@ import photo3 from "../img/photo3.svg";
 import { useEffect, useRef } from "react";
 import StickyImages from "@/components/StickyImages/StickyImages";
 import List from "@/components/List";
+import PortfolioList from "./products/(portfolio)/PortfolioList";
+// import PortfolioProductList from "./products/(portfolioProducts)/PortfolioProductsList";
 
 export default function Home() {
   const handleClick = () => {
@@ -50,20 +52,19 @@ export default function Home() {
     <main>
       <section id="section1" className={styles.main}>
         <div className={styles.container}>
-          <div>
+          <div className={styles.navigate_container}>
             <Link href="#portfolio">
-              <button className={styles.navigate_btn}>Портфолио</button>
+              <button className={styles.navigate_btn}>Работы</button>
             </Link>
             <Link href="#we">
-              <button className={styles.navigate_btn}>Кто мы вообще</button>
+              <button className={styles.navigate_btn}>Кто мы</button>
             </Link>{" "}
             <Link href="#products">
-              <button className={styles.navigate_btn}>Наши продукты</button>
+              <button className={styles.navigate_btn}>Продукты</button>
             </Link>
           </div>
           <h1 className={styles.main_text}>
-            Преобразуем ваш <br />
-            бизнес в цифровую <br /> реальность
+            Преобразуем ваш бизнес в цифровую реальность
           </h1>
           <div style={{ margin: "5vw 0" }}>
             <Button label="Начать проект" onClick={handleClick} />
@@ -76,7 +77,7 @@ export default function Home() {
         <div className={styles.portfolio_block}>
           <div className={styles.container}>
             <div id="we" className={styles.portfolio_text}>
-              <h2 className={styles.main_text}>
+              <h2 className={styles.main_text_2}>
                 Мы создаем <br />
                 продукты для <br />
                 качественного
@@ -99,10 +100,12 @@ export default function Home() {
                   <h3 className={styles.second_text} style={{ color: "white" }}>
                     Portfolio
                   </h3>
-                  <Button label="Apply" onClick={handleClick} />
+                  {/* <Button label="Apply" onClick={handleClick} /> */}
                 </div>
                 <div className={styles.portfolio_right}>
-                  <List />
+                  {/* <PortfolioProductList /> */}
+                  {/* <List /> */}
+                  <PortfolioList />
                 </div>
               </div>
             </div>{" "}
@@ -112,7 +115,9 @@ export default function Home() {
               className={styles.backImage}
               src={backImage}
               alt=""
-              layout="responsive"
+              // layout="responsive"
+              layout="fill"
+              objectFit="cover"
             />
           </div>
         </div>
@@ -122,34 +127,23 @@ export default function Home() {
           <div className={styles.platform}>
             <div className={styles.platform_top}>
               <div className={styles.platform_left}>
-                <h3 className={styles.second_text}>
-                  Запустили <br /> образовательную <br />
-                  платформу bilim.ed,
-                  <br /> которой пользуются <br />
-                  половина <br />
-                  университетов <br />
-                  Бишкека
-                </h3>
-                <Button label="Узнать подробнее" onClick={handleClick} />
+                <h3 className={styles.second_text_2}>
+                  В разработке большая образовательная платформа для всех
+                  учреждений
+                </h3>{" "}
+                <Button label="Скоро" onClick={handleClick} />
               </div>
               <p className={styles.platform_right}>
-                Современные системы <br /> образования не соответствуют <br />
-                запросам ни общества, ни рынка <br />
-                труда. Они не удовлетворяют <br />
-                потребности в качественном <br />
-                образовании и не способствуют <br />
-                всестороннему развитию <br />
-                учащихся.
+                Современные системы образования не соответствуют запросам ни
+                общества, ни рынка труда. Они не удовлетворяют потребности в
+                качественном образовании и не способствуют всестороннему
+                развитию учащихся.
               </p>
             </div>
+
             <div className={styles.platform_iPad}>
               <div className={styles.imagesWrapper}>
                 <StickyImages />
-                {/* <Image className={styles.iPad} src={iPad} alt="" />
-                <Image className={styles.iPad} src={iPad} alt="" />
-                <Image className={styles.iPad} src={iPad} alt="" />{" "}
-                <Image className={styles.iPad} src={iPad} alt="" />{" "}
-                <Image className={styles.iPad} src={iPad} alt="" /> */}
               </div>
             </div>
           </div>{" "}
@@ -166,9 +160,7 @@ export default function Home() {
                   <Image className={styles.team_photo} src={photo3} alt="" />
                 </div>
                 <p>
-                  Интегрируемся <br /> в процессы, <br /> поговорим с хэдами,
-                  <br />
-                  соберём воркшоп <br />
+                  Интегрируемся в процессы, поговорим с хэдами, соберём воркшоп
                   с исследователем
                 </p>
               </div>
@@ -176,16 +168,20 @@ export default function Home() {
                 <h3>
                   Укрепим команду <br />
                   или сами <br />
-                  поработаем над <br />
-                  продуктом: <br />
-                  ищем точки роста, <br /> закрываем задачи <br /> или запускаем
-                  MVP.{" "}
+                  поработаем над продуктом: <br />
+                  ищем точки роста, закрываем задачи или запускаем MVP.{" "}
                 </h3>
-                <p>от 100 000 сом за спринт</p>
+                <p className={styles.price}>от 100 000 сом за спринт</p>
               </div>
             </div>
           </div>
-          <Image className={styles.backImage2} src={backImage2} alt="" />
+          <Image
+            className={styles.backImage2}
+            src={backImage2}
+            alt=""
+            layout="fill"
+            objectFit="cover"
+          />
         </div>
       </section>
     </main>

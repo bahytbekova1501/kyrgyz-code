@@ -6,7 +6,7 @@ import menu from "../../img/menu.svg";
 import userImg from "../../img/user.svg";
 import arrow from "../../img/user_arrow.svg";
 import { useEffect, useState } from "react";
-// import Modal from "../modal/Modal";
+import Modal from "../modal/Modal";
 // import Admin from "@/app/(auth)/Admin";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
 const Navbar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  // const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
   const dispatch = useDispatch();
 
   const openModal = () => setIsModalOpen(true);

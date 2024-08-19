@@ -1,10 +1,39 @@
-// components/StickyImages.tsx
+"use client";
+import {
+  deleteProduct,
+  // deleteProduct,
+  fetchProducts,
+} from "@/redux/slices/productSlice";
+import { AppDispatch, RootState } from "@/redux/store";
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./StickyImages.module.css";
-import iPad from "../../img/iPad - Home Screen - Light.png";
-import Image from "next/image";
+// import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import Product from "./Product";
+import styles from "./product.module.css";
+import { StyleType } from "@/types/card.types";
+import { useDispatch } from "react-redux";
+import Link from "next/link";
+import Button from "@/components/ui/button/Button";
+import HorizontalScroll from "@/components/scroll/HorizontalScroll";
 
-const StickyImages: React.FC = () => {
+const validStyleTypes: Set<StyleType> = new Set<StyleType>([
+  "text",
+  "text-picture",
+  "text-bgImage",
+  "picture-text",
+  "text-btn",
+]);
+
+const getValidStyleType = (styleType: any): StyleType => {
+  return validStyleTypes.has(styleType as StyleType)
+    ? (styleType as StyleType)
+    : "text";
+};
+const ProductList: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const products = useSelector((state: RootState) => state.products.products);
+  const loading = useSelector((state: RootState) => state.products.loading);
+  const error = useSelector((state: RootState) => state.products.error);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHorizontalScroll, setIsHorizontalScroll] = useState(true);
 
@@ -78,19 +107,51 @@ const StickyImages: React.FC = () => {
       };
     }
   }, []);
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
+  const handleDelete = (id: number) => {
+    dispatch(deleteProduct(id));
+  };
+  // const handleScroll = (event: React.WheelEvent) => {
+  //   if (scrollContainerRef.current) {
+  //     scrollContainerRef.current.scrollLeft += event.deltaY;
+  //   }
+  // };
   return (
-    <div ref={containerRef} className={styles.scrollContainer}>
-      <div className={styles.scrollContent}>
-        <Image className={styles.iPad} src={iPad} alt="iPad" />
-        <Image className={styles.iPad} src={iPad} alt="iPad" />
-        <Image className={styles.iPad} src={iPad} alt="iPad" />
-        <Image className={styles.iPad} src={iPad} alt="iPad" />
-        <Image className={styles.iPad} src={iPad} alt="iPad" />
-        <Image className={styles.iPad} src={iPad} alt="iPad" />
+    <div>
+      {" "}
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      <div
+        className={styles.card_container}
+        // ref={scrollContainerRef}
+        // onWheel={handleScroll}
+        ref={containerRef}
+      >
+        {Array.isArray(products) && products.length > 0 ? (
+          products.map((product) => {
+            const styleType: StyleType = getValidStyleType(product.styleType);
+            return (
+              <Product
+                key={product.id}
+                product={{ ...product, styleType }}
+                onDelete={handleDelete}
+              />
+            );
+          })
+        ) : (
+          <p>No products available</p>
+        )}{" "}
+      </div>{" "}
+      <div style={{ display: "flex", justifyContent: "end" }}>
+        <Link href="/products/addProduct">
+          <button className={styles.addProduct_btn}> Добавить </button>
+        </Link>
       </div>
     </div>
   );
 };
 
-export default StickyImages;
+export default ProductList;
