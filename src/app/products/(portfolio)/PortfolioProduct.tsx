@@ -4,6 +4,10 @@ import styles from "./portfolio.module.css";
 import { PortfolioProductTypes } from "@/types/card.types";
 import downLogo from "../../../img/down.svg";
 import Image from "next/image";
+import PortfolioCard from "./(portfolioCard)/PortfolioCard";
+import PortfolioList from "./PortfolioList";
+import PortfolioCardList from "./(portfolioCard)/PortfolioCardList";
+import ProductList from "../(products)/ProductsList";
 interface ProductProps {
   item: PortfolioProductTypes;
   index: number;
@@ -15,6 +19,8 @@ const PortfolioProduct: React.FC<ProductProps> = ({ item, index }) => {
   const handleToggle = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
   };
+
+  const currentPortfolioId = item.id; // Замените на ID текущего портфолио
   return (
     <div>
       <div className={styles.list}>
@@ -56,7 +62,8 @@ const PortfolioProduct: React.FC<ProductProps> = ({ item, index }) => {
           expandedId === item.id ? styles.expanded : ""
         }`}
       >
-        <p> card</p>
+        <ProductList />
+        {/* <PortfolioCardList portfolioId={currentPortfolioId} /> */}
       </div>
       <div className={styles.bottomLine}></div>
     </div>

@@ -5,7 +5,7 @@
   overflow-x: auto;
   width: 100%;
   overflow-y: hidden;
-  padding: 10px;
+  padding: 10px 0;
   touch-action: pan-x;
 }
 .card_container::-webkit-scrollbar {
@@ -17,7 +17,7 @@
   height: 255px;
   display: flex;
   flex-direction: column;
-  margin: 0 10px;
+  margin: 0 10px 0 0;
   padding: 20px;
   border: none;
   border-radius: 40px;

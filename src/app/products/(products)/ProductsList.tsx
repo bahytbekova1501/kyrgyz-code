@@ -36,13 +36,12 @@ const ProductList: React.FC = () => {
   const error = useSelector((state: RootState) => state.products.error);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHorizontalScroll, setIsHorizontalScroll] = useState(true);
+  const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
 
   const updateScrollState = () => {
     if (containerRef.current) {
       const container = containerRef.current;
       const { scrollLeft, scrollWidth, clientWidth } = container;
-
-      // Устанавливаем состояние прокрутки на горизонтальное, если не достигнут край контейнера
       setIsHorizontalScroll(
         scrollLeft > 0 && scrollLeft < scrollWidth - clientWidth
       );
@@ -57,22 +56,20 @@ const ProductList: React.FC = () => {
 
       if (isHorizontalScroll) {
         if (delta > 0) {
-          // Прокрутка вправо
           if (scrollLeft + delta >= scrollWidth - clientWidth) {
-            container.scrollLeft = scrollWidth - clientWidth; // Достигнут конец
-            setIsHorizontalScroll(false); // Переключаемся на вертикальную прокрутку
+            container.scrollLeft = scrollWidth - clientWidth;
+            setIsHorizontalScroll(false);
           } else {
             container.scrollLeft += delta;
-            event.preventDefault(); // Блокируем вертикальное прокручивание
+            event.preventDefault();
           }
         } else {
-          // Прокрутка влево
           if (scrollLeft + delta <= 0) {
-            container.scrollLeft = 0; // Достигнуто начало
-            setIsHorizontalScroll(false); // Переключаемся на вертикальную прокрутку
+            container.scrollLeft = 0;
+            setIsHorizontalScroll(false);
           } else {
             container.scrollLeft += delta;
-            event.preventDefault(); // Блокируем вертикальное прокручивание
+            event.preventDefault();
           }
         }
       }
@@ -82,10 +79,9 @@ const ProductList: React.FC = () => {
   useEffect(() => {
     const handlePageScroll = (event: WheelEvent) => {
       if (!isHorizontalScroll) {
-        // Разрешаем вертикальную прокрутку, если горизонтальная блокирована
         return;
       }
-      event.preventDefault(); // Блокируем вертикальную прокрутку, пока активна горизонтальная
+      event.preventDefault();
     };
 
     window.addEventListener("wheel", handlePageScroll, { passive: false });
@@ -98,7 +94,6 @@ const ProductList: React.FC = () => {
     const container = containerRef.current;
     if (container) {
       container.addEventListener("wheel", handleWheel);
-      // Обновляем состояние прокрутки при изменении размеров контейнера
       const resizeObserver = new ResizeObserver(updateScrollState);
       resizeObserver.observe(container);
       return () => {
@@ -145,11 +140,15 @@ const ProductList: React.FC = () => {
           <p>No products available</p>
         )}{" "}
       </div>{" "}
-      <div style={{ display: "flex", justifyContent: "end" }}>
-        <Link href="/products/addProduct">
-          <button className={styles.addProduct_btn}> Добавить </button>
-        </Link>
-      </div>
+      {isAdmin ? (
+        <div style={{ display: "flex", justifyContent: "end" }}>
+          <Link href="/products/addProduct">
+            <button className={styles.addProduct_btn}> Добавить </button>
+          </Link>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

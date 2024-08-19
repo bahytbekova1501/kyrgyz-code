@@ -7,7 +7,12 @@ interface CardProps {
 }
 
 const PortfolioCard: React.FC<CardProps> = ({ item }) => {
-  return <div>{item.title}</div>;
+  return (
+    <div>
+      {" "}
+      <h3>{item.title}</h3>
+    </div>
+  );
 };
 
 export default PortfolioCard;

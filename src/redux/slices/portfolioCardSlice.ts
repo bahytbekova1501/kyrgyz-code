@@ -8,56 +8,62 @@ import {
 } from "@/types/card.types";
 import api from "@/api/api";
 import axios from "axios";
-interface Poprtfolio {
-  id: number;
-  title: string;
-  days: string;
-  company: string;
-  blgimage: string;
-  card: {};
-}
+// interface Card {
+//   id: number;
+//   title: string;
+//   desc: string;
+//   image: string;
+//   styleType: StyleType;
+// }
+// interface Portfolio {
+//   id: number;
+//   title: string;
+//   days: string;
+//   company: string;
+//   card: Card[];
+// }
 
 interface PortfolioState {
-  portfolio: Poprtfolio[];
+  card: PortfolioCardTypes[];
   loading: boolean;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
 const initialState: PortfolioState = {
-  portfolio: [],
+  card: [],
   loading: false,
   status: "idle",
   error: null,
 };
 
-export const fetchPortfolio = createAsyncThunk(
-  "portfolio/fetchPortfolio",
+export const fetchPortfolioCard = createAsyncThunk(
+  "card/fetchPortfolioCard",
   async () => {
     try {
-      const response = await api.get("portfolio/");
-      const data = response.data;
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.error("Ошибка при получении портфолио:", error);
-      return [];
-    }
-  }
-);
-
-export const addPortfolio = createAsyncThunk(
-  "portfolio/addPortfolio",
-  async (productData: { formData: FormData }) => {
-    try {
-      const res = await api.post(`portfolio/`, productData.formData);
+      const res = await api.get("cards/");
+      console.log(res);
       return res.data;
     } catch (error) {
-      console.log("Error add portfolio: ", error);
+      console.log("Failed to fetch products", error);
       throw error;
     }
   }
 );
-
+// export const fetchPortfolio = createAsyncThunk(
+//   "portfolio/fetchPortfolio",
+//   async () => {
+//     const db = getDatabase();
+//     const portfolioRef = ref(db, "portfolio");
+//     const res = await get(portfolioRef);
+//     if (res.exists()) {
+//       const data = res.val();
+//       //   console.log(data);
+//       return Array.isArray(data) ? data : Object.values(data);
+//     } else {
+//       return [];
+//     }
+//   }
+// );
 // export const addPortfolio = createAsyncThunk(
 //   "portfolio/addPortfolio",
 //   async (portfolioItem: Omit<PortfolioProductTypes, "id">) => {
@@ -116,36 +122,36 @@ export const addPortfolio = createAsyncThunk(
 //   }
 // );
 
-const portfolioSlice = createSlice({
-  name: "portfolio",
+const portfolioCardSlice = createSlice({
+  name: "card",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPortfolio.pending, (state) => {
+      .addCase(fetchPortfolioCard.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchPortfolio.fulfilled, (state, action) => {
+      .addCase(fetchPortfolioCard.fulfilled, (state, action) => {
         state.loading = false;
-        state.portfolio = action.payload;
+        state.card = action.payload;
       })
-      .addCase(fetchPortfolio.rejected, (state, action) => {
+      .addCase(fetchPortfolioCard.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch portfolio";
-      })
-      .addCase(addPortfolio.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(addPortfolio.fulfilled, (state, action) => {
-        state.loading = false;
-        state.portfolio.push(action.payload);
-      })
-      .addCase(addPortfolio.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Failed to add portfolio";
       });
+    // .addCase(addPortfolio.pending, (state) => {
+    //   state.loading = true;
+    //   state.error = null;
+    // })
+    // .addCase(addPortfolio.fulfilled, (state, action) => {
+    //   state.loading = false;
+    //   state.portfolio.push(action.payload);
+    // })
+    // .addCase(addPortfolio.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.error = action.error.message || "Failed to add portfolio";
+    // })
     // .addCase(updatePortfolio.pending, (state) => {
     //   state.loading = true;
     //   state.error = null;
@@ -202,4 +208,4 @@ const portfolioSlice = createSlice({
   },
 });
 
-export default portfolioSlice.reducer;
+export default portfolioCardSlice.reducer;

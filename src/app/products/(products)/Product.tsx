@@ -19,7 +19,7 @@ const Product: React.FC<ProductProps> = ({ product, onDelete }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isConfirming, setIsConfirming] = useState<boolean>(true);
   // const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  // const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
+  const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
 
   const { title, desc, image, styleType } = product;
 
@@ -93,11 +93,11 @@ const Product: React.FC<ProductProps> = ({ product, onDelete }) => {
         </div>
         {styleType === "text-bgImage" && <div className={styles.overlay} />}
         {/* Uncomment if delete button is needed */}
-        {/* {isAdmin && ( */}
-        <button onClick={openModal} className={styles.admin_btn}>
-          <Image className={styles.delete_icon} src={del} alt="" />
-        </button>
-        {/* )} */}
+        {isAdmin && (
+          <button onClick={openModal} className={styles.admin_btn}>
+            <Image className={styles.delete_icon} src={del} alt="" />
+          </button>
+        )}
       </div>{" "}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <div className={styles.modalContent}>

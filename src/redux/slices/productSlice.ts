@@ -11,6 +11,7 @@ interface Product {
   desc: string;
   image: string;
   styleType: string;
+  card: {};
 }
 
 interface ProductState {

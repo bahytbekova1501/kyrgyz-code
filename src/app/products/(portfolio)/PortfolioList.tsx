@@ -6,6 +6,7 @@ import styles from "./portfolio.module.css";
 import { useDispatch } from "react-redux";
 import { fetchPortfolio } from "@/redux/slices/portfolioSlice";
 import PortfolioProduct from "./PortfolioProduct";
+import Link from "next/link";
 
 const PortfolioList: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -14,7 +15,7 @@ const PortfolioList: React.FC = () => {
   );
   const loading = useSelector((state: RootState) => state.portfolio.loading);
   const error = useSelector((state: RootState) => state.portfolio.error);
-
+  const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
   useEffect(() => {
     dispatch(fetchPortfolio());
   }, [dispatch]);
@@ -34,6 +35,15 @@ const PortfolioList: React.FC = () => {
           <p>No products available</p>
         )}
       </div>
+      {isAdmin ? (
+        <div style={{ display: "flex", justifyContent: "end" }}>
+          <Link href="/products/addPortfolio">
+            <button className={styles.addProduct_btn}> Добавить </button>
+          </Link>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

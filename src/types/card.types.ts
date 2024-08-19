@@ -39,6 +39,7 @@ export interface PortfolioCardTypes {
   image: string;
   link: string;
   styleType: PortfolioCardStyleType;
+  portfolio: number;
 }
 
 export interface PortfolioProductForm {
@@ -46,12 +47,14 @@ export interface PortfolioProductForm {
   title: string;
   company: string;
   days: string;
-  card: PortfolioCardForm[];
+  blgimage: string;
+  // card: PortfolioCardForm[];
 }
 export interface PortfolioProductTypes {
   id: number;
   title: string;
   company: string;
   days: string;
-  card: PortfolioCardTypes[];
+  blgimage: string;
+  // card: PortfolioCardTypes[];
 }

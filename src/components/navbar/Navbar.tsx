@@ -12,19 +12,22 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 // import { logoutAdmin } from "@/redux/slices/adminSlice";
 import { RootState } from "@/redux/store";
+import AdminLogin from "@/app/(auth)/AdminLogin";
+import { logout } from "@/redux/authSlices/adminSlice";
 const Navbar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  // const handleLoginSuccess = () => {
-  //   setIsModalOpen(false);
-  // };
-  // const handleLogout = () => {
-  //   dispatch(logoutAdmin());
-  // };
+  const handleLoginSuccess = () => {
+    setIsModalOpen(false);
+  };
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <div id="navbar" className={styles.nav_container}>
       <div className={styles.nav}>
@@ -34,27 +37,27 @@ const Navbar: React.FC = () => {
 
         <div className={styles.nav_right_block}>
           <div className={styles.user_action}>
-            {/* {!isAdmin ? ( */}
-            <button className={styles.nav_auth_btn} onClick={openModal}>
-              <div className={styles.nav_auth}>
-                <Image
-                  className={styles.userImg}
-                  src={userImg}
-                  alt="User Icon"
-                />
-                <div className={styles.user_name}>
-                  <p>
-                    loni. <br /> markus
-                  </p>
+            {!isAdmin ? (
+              <button className={styles.nav_auth_btn} onClick={openModal}>
+                <div className={styles.nav_auth}>
                   <Image
-                    className={styles.arrow}
-                    src={arrow}
-                    alt="Arrow Icon"
+                    className={styles.userImg}
+                    src={userImg}
+                    alt="User Icon"
                   />
+                  <div className={styles.user_name}>
+                    <p>
+                      loni. <br /> markus
+                    </p>
+                    <Image
+                      className={styles.arrow}
+                      src={arrow}
+                      alt="Arrow Icon"
+                    />
+                  </div>
                 </div>
-              </div>
-            </button>
-            {/* ) : (
+              </button>
+            ) : (
               <>
                 <div className={styles.nav_auth}>
                   <Image
@@ -75,11 +78,11 @@ const Navbar: React.FC = () => {
                   </button>
                 </div>
               </>
-            )} */}
+            )}
           </div>
-          {/* <Modal isOpen={isModalOpen} onClose={closeModal}>
-            <Admin onClose={closeModal} />
-          </Modal> */}
+          <Modal isOpen={isModalOpen} onClose={closeModal}>
+            <AdminLogin onClose={closeModal} />
+          </Modal>
         </div>
       </div>
     </div>
