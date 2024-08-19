@@ -12,7 +12,6 @@ const Admin: React.FC<AdminProps> = ({ onClose }) => {
   const dispatch = useDispatch();
 
   const handleLogin = () => {
-    // Проверка для простого примера
     if (username === "admin" && password === "12345") {
       dispatch(setAdmin(true));
       onClose();

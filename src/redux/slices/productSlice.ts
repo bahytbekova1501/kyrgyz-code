@@ -1,8 +1,8 @@
 // /src/features/product/productSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ref, set, get, update, remove } from "@/firebaseConfig";
-import { getDatabase } from "firebase/database";
-
+// import { ref, set, get, update, remove } from "@/firebaseConfig";
+// import { getDatabase } from "firebase/database";
+import api from "@/api/api";
 // Типы данных
 
 interface Product {
@@ -25,64 +25,54 @@ const initialState: ProductState = {
   error: null,
 };
 
-// export const fetchProducts = createAsyncThunk(
-//   "products/fetchProducts",
-//   async () => {
-//     const db = getDatabase();
-//     const productsRef = ref(db, "products");
-//     const snapshot = await get(productsRef);
-//     if (snapshot.exists()) {
-//       return snapshot.val();
-//     } else {
-//       return [];
-//     }
-//   }
-// );
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const db = getDatabase();
-    const productsRef = ref(db, "products");
-    const snapshot = await get(productsRef);
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      console.log(data);
-      return Array.isArray(data) ? data : Object.values(data);
-    } else {
-      return [];
+    try {
+      const res = await api.get("products/");
+      // console.log(res);
+      return res.data;
+    } catch (error) {
+      console.log("Failed to fetch products", error);
+      throw error;
     }
   }
 );
-
 export const addProduct = createAsyncThunk(
   "products/addProduct",
-  async (product: Omit<Product, "id">) => {
-    const db = getDatabase();
-    const newProductId = Date.now(); // Генерация уникального id
-    const productWithId = { ...product, id: newProductId };
-    const productRef = ref(db, `products/${newProductId}`);
-    await set(productRef, productWithId);
-    return productWithId;
+  async (productData: { formData: FormData }) => {
+    try {
+      const res = await api.post(`products/`, productData.formData);
+      return res.data;
+    } catch (error) {
+      console.log("Error add product: ", error);
+      throw error;
+    }
   }
 );
 
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  async (product: Product) => {
-    const db = getDatabase();
-    const productRef = ref(db, `products/${product.id}`);
-    await update(productRef, product);
-    return product;
+  async ({ id, formData }: { id: number; formData: FormData }) => {
+    try {
+      const response = await api.put(`products/${id}/`, formData);
+      return response.data;
+    } catch (error) {
+      console.error("Error updating product: ", error);
+      throw error;
+    }
   }
 );
-
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (id: number) => {
-    const db = getDatabase();
-    const productRef = ref(db, `products/${id}`);
-    await remove(productRef);
-    return id;
+    try {
+      await api.delete(`/products/${id}/`);
+      return id;
+    } catch (error) {
+      console.error("Failed to delete product:", error);
+      throw error;
+    }
   }
 );
 

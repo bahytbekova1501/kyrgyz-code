@@ -7,13 +7,14 @@ import { AppDispatch } from "@/redux/store";
 import styles from "./AddProduct.module.css";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "@/firebaseConfig";
+import api from "@/api/api";
 // import { storage } from "../firebaseConfig";
 
 const AddProduct: React.FC = () => {
   const [formValue, setFormValue] = useState({
     title: "",
     desc: "",
-    image: "none",
+    image: null as File | null,
     styleType: "text",
   });
   const [file, setFile] = useState<File | null>(null);
@@ -27,51 +28,47 @@ const AddProduct: React.FC = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const selectedFile = e.target.files[0];
-      setFile(selectedFile);
-
-      if (selectedFile) {
-        const imageRef = ref(storage, `images/${selectedFile.name}`);
-        try {
-          await uploadBytes(imageRef, selectedFile);
-          const url = await getDownloadURL(imageRef);
-
-          // Обновляем форму с URL загруженного изображения
-          setFormValue((prevState) => ({
-            ...prevState,
-            image: url, // Устанавливаем URL как значение поля
-          }));
-        } catch (error) {
-          console.error("Error uploading image: ", error);
-        }
-      }
+      setFormValue({
+        ...formValue,
+        image: e.target.files[0],
+      });
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (
       !formValue.title.trim() ||
       !formValue.desc.trim() ||
-      !formValue.styleType.trim()
+      !formValue.styleType.trim() ||
+      !formValue.image
     ) {
       alert("Заполните все поля!");
       return;
     }
 
-    dispatch(addProduct(formValue));
+    // Create FormData object
+    const formData = new FormData();
+    formData.append("title", formValue.title);
+    formData.append("desc", formValue.desc);
+    formData.append("styleType", formValue.styleType);
+    formData.append("image", formValue.image);
 
-    setFormValue({
-      title: "",
-      desc: "",
-      image: "none",
-      styleType: "text",
-    });
-    setFile(null);
+    try {
+      await dispatch(addProduct({ formData })).unwrap();
+      setFormValue({
+        title: "",
+        desc: "",
+        image: null,
+        styleType: "text",
+      });
+    } catch (error) {
+      console.error("Failed to add product:", error);
+    }
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <div>

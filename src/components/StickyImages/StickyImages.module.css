@@ -25,9 +25,9 @@
   height: 100%;
   text-align: center;
 }
-/* 
+
 @media (max-width: 768px) {
   .scrollContainer {
-    height: 60vw; 
+    height: 60vw;
   }
-} */
+}

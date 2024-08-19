@@ -18,13 +18,31 @@ const PortfolioProduct: React.FC<ProductProps> = ({ item, index }) => {
   return (
     <div>
       <div className={styles.list}>
+        {" "}
+        <div className={styles.mobile_block}>
+          <div className={styles.mobile_ver}>
+            <div className={styles.num_2}>
+              {index < 10 ? `0${index + 1}` : index + 1}{" "}
+            </div>{" "}
+            <Image
+              className={styles.toggleImage_2}
+              src={downLogo}
+              alt=""
+              onClick={() => handleToggle(item.id)}
+            />
+          </div>
+        </div>
         <div className={styles.num}>
           {index < 10 ? `0${index + 1}` : index + 1}{" "}
         </div>
-        <h2 className={styles.title}>{item.title}</h2>{" "}
-        <p className={styles.company}>{item.company}</p>
-        <div>
-          <p className={styles.time}>{item.days} days</p>
+        <div className={styles.info}>
+          <h2 className={styles.title}>{item.title}</h2>{" "}
+          <div className={styles.info_2}>
+            <p className={styles.company}>{item.company}</p>
+            <div>
+              <p className={styles.time}>{item.days} days</p>
+            </div>
+          </div>
         </div>
         <Image
           className={styles.toggleImage}
@@ -40,6 +58,7 @@ const PortfolioProduct: React.FC<ProductProps> = ({ item, index }) => {
       >
         <p> card</p>
       </div>
+      <div className={styles.bottomLine}></div>
     </div>
   );
 };

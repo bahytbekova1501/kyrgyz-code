@@ -1,11 +1,11 @@
 .button {
   background-color: #14ae5c;
-  width: 19vw;
-  height: 5vw;
+  width: 300px;
+  height: 80px;
   color: white;
   border: none;
-  border-radius: 1.8vw;
-  font-size: 1.4vw;
+  border-radius: 30px;
+  font-size: 20px;
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -26,17 +26,26 @@
 
 @media (max-width: 769px) {
   .button {
-    width: 28vw;
+    /* width: 28vw;
     height: 8vw;
     border-radius: 3vw;
-    font-size: 2vw;
+    font-size: 2vw; */
   }
 }
 @media (max-width: 450px) {
   .button {
-    width: 94vw;
-    height: 20vw;
-    border-radius: 7vw;
-    font-size: 5vw;
+    width: 100%;
+    /* height: 20vw; */
+    /* border-radius: 7vw; */
+    /* font-size: 5vw; */
   }
+}
+@media (max-width: 370px) {
+  .button {
+    height: 20vw;
+    font-size: 5.5vw;
+    border-radius: 7vw;
+  }
+}
+@media (max-width: 315px) {
 }

@@ -19,7 +19,7 @@ const Product: React.FC<ProductProps> = ({ product, onDelete }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isConfirming, setIsConfirming] = useState<boolean>(true);
   // const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
+  // const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
 
   const { title, desc, image, styleType } = product;
 
@@ -42,7 +42,6 @@ const Product: React.FC<ProductProps> = ({ product, onDelete }) => {
 
   return (
     <>
-      {!isAdmin ? <></> : <></>}
       <div className={cardStyle}>
         {styleType === "text-bgImage" && image && image !== "none" && (
           <div
@@ -55,23 +54,23 @@ const Product: React.FC<ProductProps> = ({ product, onDelete }) => {
             <Image
               src={num3}
               alt="Product"
-              style={{ width: "5vw", height: "5vw" }}
+              style={{ width: "65px", height: "72px" }}
             />
           )}
           {styleType === "picture-text" && image && image !== "none" && (
             <img
               src={image}
               alt="Product"
-              style={{ width: "11vw", height: "7vw" }}
+              style={{ width: "188px", height: "110px" }}
             />
           )}{" "}
           {styleType === "text" && (
             <>
-              <p style={{ fontSize: "1.2vw", fontWeight: "500" }}>Более</p>
+              <p style={{ fontSize: "18px", fontWeight: "700" }}>Более</p>
               <Image
                 src={num}
                 alt="Product"
-                style={{ width: "10vw", height: "6vw" }}
+                style={{ width: "150px", height: "90px" }}
               />
             </>
           )}
@@ -81,7 +80,7 @@ const Product: React.FC<ProductProps> = ({ product, onDelete }) => {
             <img
               src={image}
               alt="Product"
-              style={{ width: "8vw", height: "2.8vw" }}
+              style={{ width: "125px", height: "40px" }}
             />
           )}{" "}
           {styleType === "text-btn" && (
@@ -94,11 +93,11 @@ const Product: React.FC<ProductProps> = ({ product, onDelete }) => {
         </div>
         {styleType === "text-bgImage" && <div className={styles.overlay} />}
         {/* Uncomment if delete button is needed */}
-        {isAdmin && (
-          <button onClick={openModal} className={styles.admin_btn}>
-            <Image className={styles.delete_icon} src={del} alt="" />
-          </button>
-        )}
+        {/* {isAdmin && ( */}
+        <button onClick={openModal} className={styles.admin_btn}>
+          <Image className={styles.delete_icon} src={del} alt="" />
+        </button>
+        {/* )} */}
       </div>{" "}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <div className={styles.modalContent}>

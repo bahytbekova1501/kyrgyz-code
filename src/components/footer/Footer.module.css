@@ -3,7 +3,8 @@
   margin-top: auto;
 }
 .logo {
-  width: 7vw;
+  width: 100px;
+  height: 24px;
   height: auto;
 }
 .footer_top,
@@ -28,7 +29,7 @@
 .footer_c,
 .footer_up_btn {
   color: #14ae5c;
-  font-size: 1.2vw;
+  font-size: 16px;
   font-weight: 500;
 }
 .right_block {
@@ -45,10 +46,12 @@
 .footer_up_btn {
   display: flex;
   align-items: center;
-  padding: 0.5vw 0.6vw;
+  padding: 10px;
   background-color: transparent;
   border: 1px solid #14ae5c;
-  border-radius: 3vw;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 0 0 0 5px;
 }
 .ticker {
   position: relative;
@@ -74,4 +77,18 @@
   to {
     transform: translate3d(-100%, 0, 0);
   }
+}
+@media (max-width: 450px) {
+  .ticker_item {
+    font-size: 19vw;
+  }
+}
+@media (max-width: 370px) {
+  .right_block,
+  .footer_c,
+  .footer_up_btn {
+    font-size: 5vw;
+  }
+}
+@media (max-width: 315px) {
 }

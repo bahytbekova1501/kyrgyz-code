@@ -42,7 +42,7 @@ export interface PortfolioCardTypes {
 }
 
 export interface PortfolioProductForm {
-  // id: number;
+  id: number;
   title: string;
   company: string;
   days: string;

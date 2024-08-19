@@ -1,0 +1,18 @@
+/* HorizontalScroll.module.css */
+.horizontalScrollContainer {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.horizontalScrollContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollItem {
+  display: inline-block;
+  min-width: 200px; /* Change as needed */
+  margin-right: 10px; /* Spacing between items */
+}
