@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
 const Navbar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  // const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
   const dispatch = useDispatch();
 
   const openModal = () => setIsModalOpen(true);
