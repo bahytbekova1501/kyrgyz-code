@@ -84,9 +84,9 @@ export default function Home() {
           <div className={styles.container}>
             <div id="we" className={styles.portfolio_text}>
               <h2 className={styles.main_text_2}>
-                Мы создаем <br />
-                продукты для <br />
-                качественного
+                Мы разрабатываем
+                <br /> решения для
+                <br /> эффективного
                 <br />
                 <span>
                   взаимодействия <br />
@@ -95,7 +95,7 @@ export default function Home() {
                 </span>
               </h2>
               <div className={styles.star_logo}>
-                <Image src={star} alt="" layout="responsive" />
+                <Image src={star} alt="" fill />
               </div>{" "}
             </div>{" "}
           </div>
@@ -116,16 +116,15 @@ export default function Home() {
               </div>
             </div>{" "}
           </div>
-          <div>
-            <Image
-              className={styles.backImage}
-              src={backImage}
-              alt=""
-              // layout="responsive"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
+
+          <Image
+            className={styles.backImage}
+            src={backImage}
+            alt=""
+            // layout="responsive"
+            fill
+            style={{ objectFit: "cover" }}
+          />
         </div>
       </section>
       <section id="products">
@@ -195,8 +194,8 @@ export default function Home() {
             className={styles.backImage2}
             src={backImage2}
             alt=""
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
           />
         </div>
       </section>

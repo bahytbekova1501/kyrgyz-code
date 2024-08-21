@@ -20,7 +20,8 @@ const PortfolioProduct: React.FC<ProductProps> = ({ item, index }) => {
     setExpandedId(expandedId === id ? null : id);
   };
 
-  const currentPortfolioId = item.id; // Замените на ID текущего портфолио
+  const currentPortfolioId = item.id;
+  const isExpanded = expandedId === item.id;
   return (
     <div>
       <div className={styles.list}>
@@ -31,7 +32,9 @@ const PortfolioProduct: React.FC<ProductProps> = ({ item, index }) => {
               {index < 10 ? `0${index + 1}` : index + 1}{" "}
             </div>{" "}
             <Image
-              className={styles.toggleImage_2}
+              className={`${styles.toggleImage_2} ${
+                isExpanded ? styles.expanded : ""
+              }`}
               src={downLogo}
               alt=""
               onClick={() => handleToggle(item.id)}
@@ -51,7 +54,9 @@ const PortfolioProduct: React.FC<ProductProps> = ({ item, index }) => {
           </div>
         </div>
         <Image
-          className={styles.toggleImage}
+          className={`${styles.toggleImage} ${
+            isExpanded ? styles.expanded : ""
+          }`}
           src={downLogo}
           alt=""
           onClick={() => handleToggle(item.id)}
@@ -62,8 +67,8 @@ const PortfolioProduct: React.FC<ProductProps> = ({ item, index }) => {
           expandedId === item.id ? styles.expanded : ""
         }`}
       >
-        <ProductList />
-        {/* <PortfolioCardList portfolioId={currentPortfolioId} /> */}
+        {/* <ProductList /> */}
+        <PortfolioCardList portfolioId={currentPortfolioId} />
       </div>
       <div className={styles.bottomLine}></div>
     </div>

@@ -3,35 +3,46 @@ import api from "@/api/api";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
+interface AdminInfo {
+  username: string;
+  token: string;
+}
 interface AdminState {
   isAuthenticated: boolean;
   isAdmin: boolean;
-  adminData: any;
-  status: "idle" | "loading" | "succeeded" | "failed";
+  adminInfo: AdminInfo | null;
+  loading: boolean;
+  // status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
 
 const initialState: AdminState = {
   isAuthenticated: false,
   isAdmin: false,
-  adminData: null,
-  status: "idle",
+  adminInfo: null,
+  // status: "idle",
   error: null,
+  loading: false,
 };
-
-// Асинхронный thunk для логина
 export const login = createAsyncThunk(
-  "admin/login",
+  "auth/login",
   async (
-    credentials: { username: string; password: string },
+    { username, password }: { username: string; password: string },
     { rejectWithValue }
   ) => {
     try {
-      const response = await api.post("users/login/", credentials);
-      return response.data;
-    } catch (error) {
-      const message = (error as any).response?.data?.message || "Unknown error";
-      return rejectWithValue(message);
+      const response = await api.post("admin/", {
+        username,
+        password,
+      });
+      const { token, username: adminUsername } = response.data;
+
+      // Сохранение токена в localStorage
+      localStorage.setItem("adminToken", token);
+
+      return { username: adminUsername, token };
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Ошибка входа");
     }
   }
 );
@@ -43,7 +54,9 @@ const adminSlice = createSlice({
     logout(state) {
       state.isAuthenticated = false;
       state.isAdmin = false;
-      state.adminData = null;
+      state.adminInfo = null;
+      state.error = null;
+      localStorage.removeItem("adminToken");
     },
     setAdmin(state, action: PayloadAction<boolean>) {
       state.isAdmin = action.payload;
@@ -52,17 +65,19 @@ const adminSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.status = "loading";
+        state.loading = true;
         state.error = null;
       })
       .addCase(login.fulfilled, (state, action: PayloadAction<any>) => {
         state.isAuthenticated = true;
-        state.adminData = action.payload;
-        state.status = "succeeded";
+        state.adminInfo = action.payload;
+        state.loading = false;
       })
       .addCase(login.rejected, (state, action) => {
-        state.status = "failed";
+        state.isAuthenticated = false;
+        state.adminInfo = null;
         state.error = action.payload as string;
+        state.loading = false;
       });
   },
 });

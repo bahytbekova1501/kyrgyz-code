@@ -84,11 +84,7 @@ const Product: React.FC<ProductProps> = ({ product, onDelete }) => {
             />
           )}{" "}
           {styleType === "text-btn" && (
-            <button className={styles.text_button}>
-              {" "}
-              <Image className={styles.btnlogo} src={btnlogo} alt="" />{" "}
-              Посмотреть
-            </button>
+            <button className={styles.text_button}>Посмотреть</button>
           )}
         </div>
         {styleType === "text-bgImage" && <div className={styles.overlay} />}

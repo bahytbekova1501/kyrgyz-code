@@ -30,7 +30,7 @@ const PortfolioCardList: React.FC<PortfolioCardListProps> = ({
     <div>
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      <div className={styles.list_container}>
+      <div className={styles.card_container}>
         {Array.isArray(filteredCards) && filteredCards.length > 0 ? (
           filteredCards.map((card) => {
             return <PortfolioCard key={card.id} item={card} />;

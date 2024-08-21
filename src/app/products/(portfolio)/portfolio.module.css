@@ -92,7 +92,7 @@
 }
 .bottomLine {
   width: 100%;
-  border-top: 1px solid #ffffff46; /* Тонкая линия */
+  border-top: 1px solid #ffffff46;
 }
 
 .toggleImage,
@@ -103,6 +103,10 @@
   cursor: pointer;
 }
 
+.toggleImage.expanded,
+.toggleImage_2.expanded {
+  transform: rotate(180deg);
+}
 .additionalInfo {
   background: transparent;
   margin: 30px 0;
@@ -199,4 +203,7 @@
   }
 }
 @media (max-width: 315px) {
+  .list_container {
+    height: 160vw;
+  }
 }
