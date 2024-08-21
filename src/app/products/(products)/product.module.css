@@ -3,10 +3,10 @@
   flex-direction: row;
   justify-content: space-between;
   overflow-x: auto;
+  overflow-y: auto;
   width: 100%;
-  overflow-y: hidden;
   padding: 10px 0;
-  touch-action: pan-x;
+  touch-action: pan-x pan-y;
 }
 .card_container::-webkit-scrollbar {
   display: none;
