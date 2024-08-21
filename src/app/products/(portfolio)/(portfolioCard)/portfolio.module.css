@@ -6,6 +6,7 @@
   width: 100%;
   padding: 10px 0;
   touch-action: pan-x;
+  touch-action: pan-y;
 }
 .card_container::-webkit-scrollbar {
   display: none;
