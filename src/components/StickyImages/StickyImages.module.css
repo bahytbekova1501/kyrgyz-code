@@ -1,16 +1,13 @@
-.scrollContainer {
+/* .scrollContainer {
   margin: 4.2vw 0 0 0;
-  /* overflow: hidden; */
   overflow-x: auto;
   white-space: nowrap;
   width: 100%;
   height: 43vw;
-  touch-action: pan-x; /* Разрешаем горизонтальную прокрутку на мобильных устройствах */
+  touch-action: pan-x;
 }
 .scrollContainer::-webkit-scrollbar {
   display: none;
-  /* width: 0.5vw;
-  border-radius: 0.5vw; */
 }
 .scrollContent {
   display: flex;
@@ -30,4 +27,16 @@
   .scrollContainer {
     height: 60vw;
   }
+} */
+
+.carouselContainer {
+  margin: 4.2vw 0 0 0;
+  position: relative;
+  width: 100%;
+  transition: none;
+}
+.carouselItem {
+  position: relative;
+  padding: 0 4vw 0 0;
+  outline: none;
 }

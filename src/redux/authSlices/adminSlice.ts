@@ -25,13 +25,13 @@ const initialState: AdminState = {
   loading: false,
 };
 export const login = createAsyncThunk(
-  "auth/login",
+  "admin/login",
   async (
     { username, password }: { username: string; password: string },
     { rejectWithValue }
   ) => {
     try {
-      const response = await api.post("admin/", {
+      const response = await api.post("login/", {
         username,
         password,
       });

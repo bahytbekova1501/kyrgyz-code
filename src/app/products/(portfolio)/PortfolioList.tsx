@@ -1,6 +1,6 @@
 "use client";
 import { AppDispatch, RootState } from "@/redux/store";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./portfolio.module.css";
 import { useDispatch } from "react-redux";
@@ -20,6 +20,12 @@ const PortfolioList: React.FC = () => {
     dispatch(fetchPortfolio());
   }, [dispatch]);
   console.log("Portfolio data:", portfolio);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+
+  const handleToggle = (id: number) => {
+    setExpandedId((prevId) => (prevId === id ? null : id));
+  };
+
   return (
     <div>
       {loading && <p>Loading...</p>}
@@ -28,7 +34,13 @@ const PortfolioList: React.FC = () => {
         {Array.isArray(portfolio) && portfolio.length > 0 ? (
           portfolio.map((product, index) => {
             return (
-              <PortfolioProduct key={product.id} item={product} index={index} />
+              <PortfolioProduct
+                key={product.id}
+                item={product}
+                index={index}
+                expandedId={expandedId}
+                onToggle={handleToggle}
+              />
             );
           })
         ) : (

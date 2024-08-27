@@ -12,40 +12,42 @@ interface ProductProps {
   item: PortfolioProductTypes;
   index: number;
   //   onDelete: (id: number) => void;
+  expandedId: number | null;
+  onToggle: (id: number) => void;
 }
 
-const PortfolioProduct: React.FC<ProductProps> = ({ item, index }) => {
-  const [expandedId, setExpandedId] = useState<number | null>(null);
-  const handleToggle = (id: number) => {
-    setExpandedId(expandedId === id ? null : id);
-  };
-
+const PortfolioProduct: React.FC<ProductProps> = ({
+  item,
+  index,
+  expandedId,
+  onToggle,
+}) => {
   const currentPortfolioId = item.id;
   const isExpanded = expandedId === item.id;
+
   return (
     <div>
       <div className={styles.list}>
-        {" "}
         <div className={styles.mobile_block}>
           <div className={styles.mobile_ver}>
             <div className={styles.num_2}>
-              {index < 10 ? `0${index + 1}` : index + 1}{" "}
-            </div>{" "}
+              {index < 10 ? `0${index + 1}` : index + 1}
+            </div>
             <Image
               className={`${styles.toggleImage_2} ${
                 isExpanded ? styles.expanded : ""
               }`}
               src={downLogo}
               alt=""
-              onClick={() => handleToggle(item.id)}
+              onClick={() => onToggle(item.id)}
             />
           </div>
         </div>
         <div className={styles.num}>
-          {index < 10 ? `0${index + 1}` : index + 1}{" "}
+          {index < 10 ? `0${index + 1}` : index + 1}
         </div>
         <div className={styles.info}>
-          <h2 className={styles.title}>{item.title}</h2>{" "}
+          <h2 className={styles.title}>{item.title}</h2>
           <div className={styles.info_2}>
             <p className={styles.company}>{item.company}</p>
             <div>
@@ -59,15 +61,14 @@ const PortfolioProduct: React.FC<ProductProps> = ({ item, index }) => {
           }`}
           src={downLogo}
           alt=""
-          onClick={() => handleToggle(item.id)}
+          onClick={() => onToggle(item.id)}
         />
       </div>
       <div
         className={`${styles.additionalInfo} ${
-          expandedId === item.id ? styles.expanded : ""
+          isExpanded ? styles.expanded : ""
         }`}
       >
-        {/* <ProductList /> */}
         <PortfolioCardList portfolioId={currentPortfolioId} />
       </div>
       <div className={styles.bottomLine}></div>
