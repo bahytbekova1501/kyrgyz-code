@@ -15,7 +15,6 @@ const PortfolioList: React.FC = () => {
   );
   const loading = useSelector((state: RootState) => state.portfolio.loading);
   const error = useSelector((state: RootState) => state.portfolio.error);
-  const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
   useEffect(() => {
     dispatch(fetchPortfolio());
   }, [dispatch]);
@@ -28,34 +27,23 @@ const PortfolioList: React.FC = () => {
 
   return (
     <div>
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <p style={{ color: "white", fontSize: "22px" }}>Loading...</p>
+      )}
       {error && <p>Error: {error}</p>}
       <div className={styles.list_container}>
-        {Array.isArray(portfolio) && portfolio.length > 0 ? (
-          portfolio.map((product, index) => {
-            return (
-              <PortfolioProduct
-                key={product.id}
-                item={product}
-                index={index}
-                expandedId={expandedId}
-                onToggle={handleToggle}
-              />
-            );
-          })
-        ) : (
-          <p>No products available</p>
-        )}
+        {portfolio.map((product, index) => {
+          return (
+            <PortfolioProduct
+              key={product.id}
+              item={product}
+              index={index}
+              expandedId={expandedId}
+              onToggle={handleToggle}
+            />
+          );
+        })}
       </div>
-      {isAdmin ? (
-        <div style={{ display: "flex", justifyContent: "end" }}>
-          <Link href="/products/addPortfolio">
-            <button className={styles.addProduct_btn}> Добавить </button>
-          </Link>
-        </div>
-      ) : (
-        <></>
-      )}
     </div>
   );
 };

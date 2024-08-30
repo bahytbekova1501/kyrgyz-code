@@ -185,7 +185,7 @@ const ProductList: React.FC = () => {
   const products = useSelector((state: RootState) => state.products.products);
   const loading = useSelector((state: RootState) => state.products.loading);
   const error = useSelector((state: RootState) => state.products.error);
-  const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
+  const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -214,7 +214,7 @@ const ProductList: React.FC = () => {
         },
       },
       {
-        breakpoint: 1470,
+        breakpoint: 1500,
         settings: {
           slidesToShow: 4,
         },
@@ -246,8 +246,7 @@ const ProductList: React.FC = () => {
       {error && <p>Error: {error}</p>}
       <div className={styles.sliderContainer}>
         <Slider {...settings}>
-          {
-            // Array.isArray(products) && products.length > 0 ? (
+          {Array.isArray(products) && products.length > 0 ? (
             products.map((product) => {
               const styleType: StyleType = getValidStyleType(product.styleType);
               return (
@@ -259,19 +258,11 @@ const ProductList: React.FC = () => {
                 </div>
               );
             })
-            // ) : (
-            //   <p>No products available</p>
-            // )
-          }
+          ) : (
+            <p>Empty</p>
+          )}
         </Slider>
       </div>
-      {isAdmin && (
-        <div style={{ display: "flex", justifyContent: "end" }}>
-          <Link href="/products/addProduct">
-            <button className={styles.addProduct_btn}>Добавить</button>
-          </Link>
-        </div>
-      )}
     </div>
   );
 };

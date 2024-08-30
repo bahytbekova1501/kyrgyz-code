@@ -14,7 +14,6 @@ interface Poprtfolio {
   days: string;
   company: string;
   blgimage: string;
-  card: {};
 }
 
 interface PortfolioState {

@@ -75,7 +75,7 @@ const PortfolioCardList: React.FC<PortfolioCardListProps> = ({
   const portfolioCards = useSelector((state: RootState) => state.card.card);
   const loading = useSelector((state: RootState) => state.card.loading);
   const error = useSelector((state: RootState) => state.card.error);
-  const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
+  const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
 
   useEffect(() => {
     dispatch(fetchPortfolioCard());
@@ -99,7 +99,9 @@ const PortfolioCardList: React.FC<PortfolioCardListProps> = ({
     centerMode: false, // Consider turning this off if it causes layout issues
     responsive: [
       { breakpoint: 1800, settings: { slidesToShow: 3 } },
-      { breakpoint: 882, settings: { slidesToShow: 2 } },
+      { breakpoint: 1340, settings: { slidesToShow: 2 } },
+      { breakpoint: 1100, settings: { slidesToShow: 3 } },
+      { breakpoint: 890, settings: { slidesToShow: 2 } },
       { breakpoint: 590, settings: { slidesToShow: 1 } },
     ],
   };
@@ -117,7 +119,7 @@ const PortfolioCardList: React.FC<PortfolioCardListProps> = ({
               </div>
             ))
           ) : (
-            <p>No products available</p>
+            <p>Empty</p>
           )}
         </Slider>
       </div>

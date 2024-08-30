@@ -13,11 +13,12 @@ import { useDispatch } from "react-redux";
 // import { logoutAdmin } from "@/redux/slices/adminSlice";
 import { RootState } from "@/redux/store";
 import AdminLogin from "@/app/(auth)/AdminLogin";
-import { logout } from "@/redux/authSlices/adminSlice";
+import { logout } from "@/redux/authSlices/authSlice";
+
 const Navbar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
+  const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);

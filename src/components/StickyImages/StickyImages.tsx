@@ -100,27 +100,27 @@ const StickyImages: React.FC = () => {
   const items = [
     {
       id: 1,
-      imageSrc: "/img/iPad - Home Screen - Light.png",
+      imageSrc: require("../../img/iPad - Home Screen - Light.png"),
       title: "Item 1",
     },
     {
       id: 2,
-      imageSrc: "/img/iPad - Home Screen - Light.png",
+      imageSrc: require("../../img/iPad - Home Screen - Light.png"),
       title: "Item 2",
     },
     {
       id: 3,
-      imageSrc: "/img/iPad - Home Screen - Light.png",
+      imageSrc: require("../../img/iPad - Home Screen - Light.png"),
       title: "Item 3",
     },
     {
       id: 4,
-      imageSrc: "/img/iPad - Home Screen - Light.png",
+      imageSrc: require("../../img/iPad - Home Screen - Light.png"),
       title: "Item 4",
     },
     {
       id: 5,
-      imageSrc: "/img/iPad - Home Screen - Light.png",
+      imageSrc: require("../../img/iPad - Home Screen - Light.png"),
       title: "Item 5",
     },
   ];
@@ -135,7 +135,34 @@ const StickyImages: React.FC = () => {
     autoplaySpeed: 3000,
     arrows: false,
     centerMode: true,
-    centerPadding: "30% 0 0",
+    centerPadding: "100% 0 0",
+    responsive: [
+      {
+        breakpoint: 9999,
+        settings: {
+          centerPadding: "20%",
+        },
+      },
+
+      {
+        breakpoint: 1500,
+        settings: {
+          centerPadding: "100% 0 0",
+        },
+      },
+      {
+        breakpoint: 700,
+        settings: {
+          centerPadding: "30% 0 0",
+        },
+      },
+      {
+        breakpoint: 400,
+        settings: {
+          centerPadding: "10% 0 0",
+        },
+      },
+    ],
   };
 
   return (
@@ -148,8 +175,8 @@ const StickyImages: React.FC = () => {
               src={item.imageSrc}
               alt={item.title}
               layout="responsive"
-              width={200}
-              height={100}
+              width={900}
+              height={600}
             />
           </div>
         ))}

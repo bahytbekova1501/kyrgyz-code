@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productSlice from "./slices/productSlice";
 import portfolioSlice from "./slices/portfolioSlice";
-import adminSlice from "./authSlices/adminSlice";
 import portfolioCardSlice from "./slices/portfolioCardSlice";
+import authSlice from "./authSlices/authSlice";
 
 export const store = configureStore({
   reducer: {
-    admin: adminSlice,
+    auth: authSlice,
     products: productSlice,
     portfolio: portfolioSlice,
     card: portfolioCardSlice,

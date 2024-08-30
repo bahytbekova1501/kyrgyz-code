@@ -24,12 +24,6 @@
 }
 
 @media (max-width: 769px) {
-  .button {
-    /* width: 28vw;
-    height: 8vw;
-    border-radius: 3vw;
-    font-size: 2vw; */
-  }
 }
 @media (max-width: 450px) {
   .button {

@@ -15,9 +15,11 @@ import { useEffect, useRef } from "react";
 import StickyImages from "@/components/StickyImages/StickyImages";
 import List from "@/components/List";
 import PortfolioList from "./products/(portfolio)/PortfolioList";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 // import PortfolioProductList from "./products/(portfolioProducts)/PortfolioProductsList";
-
 export default function Home() {
+  const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
   const handleClick = () => {
     alert("Button clicked!");
   };
@@ -77,54 +79,86 @@ export default function Home() {
           </div>
 
           <ProductList />
+          {isAdmin && (
+            <div style={{ margin: "20px 0 0 0" }}>
+              <Link href="/products/addProduct">
+                <Button label="добавить" color="black" />
+              </Link>
+            </div>
+          )}
         </div>
       </section>
       <section>
-        <div className={styles.portfolio_block}>
-          <div className={styles.container}>
-            <div id="we" className={styles.portfolio_text}>
-              <h2 className={styles.main_text_2}>
-                Мы разрабатываем
-                <br /> решения для
-                <br /> эффективного
-                <br />
-                <span>
-                  взаимодействия <br />
-                  между людьми, <br />
-                  бизнесом и<br /> государством.
-                </span>
-              </h2>
-              <div className={styles.star_logo}>
-                <Image src={star} alt="" fill />
-              </div>{" "}
-            </div>{" "}
-          </div>
-          <div id="portfolio">
+        <div className={styles.portfolio}>
+          <div className={styles.portfolio_block}>
             <div className={styles.container}>
-              <div id="portfolio" className={styles.portfolio_card}>
-                <div className={styles.portfolio_left}>
-                  <h3 className={styles.second_text} style={{ color: "white" }}>
-                    Portfolio
-                  </h3>
-                  {/* <Button label="Apply" onClick={handleClick} /> */}
+              <div id="we" className={styles.portfolio_text}>
+                <h2 className={styles.main_text_2}>
+                  Мы разрабатываем
+                  <br /> решения для
+                  <br /> эффективного
+                  <br />
+                  <span>
+                    взаимодействия <br />
+                    между людьми, <br />
+                    бизнесом и<br /> государством.
+                  </span>
+                  <div className={styles.star_logo}>
+                    <Image src={star} alt="" fill />
+                  </div>{" "}
+                </h2>
+              </div>{" "}
+            </div>
+            <div id="portfolio">
+              <div className={styles.container}>
+                <div id="portfolio" className={styles.portfolio_card}>
+                  <div className={styles.portfolio_left}>
+                    <h3
+                      className={styles.second_text}
+                      style={{ color: "white" }}
+                    >
+                      Portfolio
+                    </h3>
+                    {/* <Button label="Apply" onClick={handleClick} /> */}
+                  </div>
+                  <div className={styles.portfolio_right}>
+                    {/* <PortfolioProductList /> */}
+                    {/* <List /> */}
+                    <PortfolioList />
+                  </div>
                 </div>
-                <div className={styles.portfolio_right}>
-                  {/* <PortfolioProductList /> */}
-                  {/* <List /> */}
-                  <PortfolioList />
-                </div>
-              </div>
-            </div>{" "}
-          </div>
+              </div>{" "}
+            </div>
 
-          <Image
-            className={styles.backImage}
-            src={backImage}
-            alt=""
-            // layout="responsive"
-            fill
-            style={{ objectFit: "cover" }}
-          />
+            <Image
+              className={styles.backImage}
+              src={backImage}
+              alt=""
+              // layout="responsive"
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+          {isAdmin ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "20px 0 0 0",
+              }}
+            >
+              <Link
+                href="/products/addPortfolio"
+                style={{
+                  width: "94%",
+                }}
+              >
+                <Button label="добавить" color="black" />
+              </Link>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </section>
       <section id="products">

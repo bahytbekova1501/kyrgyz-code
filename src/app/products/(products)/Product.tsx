@@ -19,7 +19,7 @@ const Product: React.FC<ProductProps> = ({ product, onDelete }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isConfirming, setIsConfirming] = useState<boolean>(true);
   // const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  const isAdmin = useSelector((state: RootState) => state.admin.isAdmin);
+  const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
 
   const { title, desc, image, styleType } = product;
 
