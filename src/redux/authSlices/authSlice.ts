@@ -1,5 +1,6 @@
 // store/authSlice.ts
 import api from "@/api/api";
+import { getLocalStorageItem } from "@/utils/utils";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -12,13 +13,12 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  accessToken: localStorage.getItem("accessToken") || null,
-  refreshToken: localStorage.getItem("refreshToken") || null,
+  accessToken: getLocalStorageItem("accessToken") || null,
+  refreshToken: getLocalStorageItem("refreshToken") || null,
   loading: false,
   error: null,
-  isAdmin: JSON.parse(localStorage.getItem("isAdmin") || "false"),
+  isAdmin: JSON.parse(getLocalStorageItem("isAdmin") || "false"),
 };
-
 // Асинхронное действие для входа пользователя
 export const login = createAsyncThunk(
   "auth/login",
@@ -34,13 +34,19 @@ export const login = createAsyncThunk(
       const { access, refresh } = response.data;
       // Определяем, является ли пользователь администратором
       const isAdmin = username === "superuser" && password === "1";
-      localStorage.setItem("accessToken", access);
-      localStorage.setItem("refreshToken", refresh);
-      localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("accessToken", access);
+        localStorage.setItem("refreshToken", refresh);
+        localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
+      }
       return { access, refresh, isAdmin };
       //   return response.data; // Данные ответа с сервера (access и refresh токены)
     } catch (error: any) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(
+        error.response?.data?.detail ||
+          error.message ||
+          "Неверный логин или пароль"
+      );
     }
   }
 );
@@ -52,7 +58,9 @@ export const refreshToken = createAsyncThunk(
         refresh,
       });
       const { access } = response.data;
-      localStorage.setItem("accessToken", access);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("accessToken", access);
+      }
       return access;
     } catch (error: any) {
       return rejectWithValue(error.response.data);
@@ -68,9 +76,11 @@ const authSlice = createSlice({
       state.accessToken = null;
       state.refreshToken = null;
       state.isAdmin = false; // Сбрасываем статус администратора при выходе
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("isAdmin");
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("isAdmin");
+      }
     },
   },
   extraReducers: (builder) => {

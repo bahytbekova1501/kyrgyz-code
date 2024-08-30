@@ -34,7 +34,7 @@ export const fetchPortfolio = createAsyncThunk(
     try {
       const response = await api.get("portfolio/");
       const data = response.data;
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (error) {
       console.error("Ошибка при получении портфолио:", error);

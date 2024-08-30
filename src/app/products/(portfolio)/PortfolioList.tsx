@@ -18,7 +18,7 @@ const PortfolioList: React.FC = () => {
   useEffect(() => {
     dispatch(fetchPortfolio());
   }, [dispatch]);
-  console.log("Portfolio data:", portfolio);
+  // console.log("Portfolio data:", portfolio);
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   const handleToggle = (id: number) => {

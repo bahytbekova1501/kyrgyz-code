@@ -81,7 +81,7 @@ const PortfolioCardList: React.FC<PortfolioCardListProps> = ({
     dispatch(fetchPortfolioCard());
   }, [dispatch]);
 
-  console.log("Portfolio data:", portfolioCards);
+  // console.log("Portfolio data:", portfolioCards);
 
   const filteredCards = portfolioCards.filter(
     (card) => card.portfolio === portfolioId

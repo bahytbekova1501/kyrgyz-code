@@ -39,7 +39,7 @@ export const fetchPortfolioCard = createAsyncThunk(
   async () => {
     try {
       const res = await api.get("cards/");
-      console.log(res);
+      // console.log(res);
       return res.data;
     } catch (error) {
       console.log("Failed to fetch products", error);
