@@ -5,10 +5,8 @@ import { useDispatch } from "react-redux";
 import { addProduct } from "@/redux/slices/productSlice";
 import { AppDispatch } from "@/redux/store";
 import styles from "./AddProduct.module.css";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from "@/firebaseConfig";
+
 import api from "@/api/api";
-// import { storage } from "../firebaseConfig";
 
 const AddProduct: React.FC = () => {
   const [formValue, setFormValue] = useState({

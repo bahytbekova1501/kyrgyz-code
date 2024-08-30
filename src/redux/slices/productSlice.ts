@@ -1,7 +1,6 @@
 // /src/features/product/productSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import { ref, set, get, update, remove } from "@/firebaseConfig";
-// import { getDatabase } from "firebase/database";
+
 import api from "@/api/api";
 // Типы данных
 

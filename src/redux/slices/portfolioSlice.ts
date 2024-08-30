@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { getDatabase } from "firebase/database";
-// import { ref, set, get, update, remove } from "@/firebaseConfig";
+
 import {
   PortfolioCardTypes,
   PortfolioProductTypes,

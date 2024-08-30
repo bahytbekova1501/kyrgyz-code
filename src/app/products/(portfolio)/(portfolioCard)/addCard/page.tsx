@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchPortfolio } from "@/redux/slices/portfolioSlice";
 import { PortfolioCardTypes } from "@/types/card.types";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddCard: React.FC = () => {
   // const [portfolioId, setPortfolioId] = useState<number | undefined>(undefined);
